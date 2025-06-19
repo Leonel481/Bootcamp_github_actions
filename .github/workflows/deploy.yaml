@@ -15,7 +15,7 @@ jobs:
       - name: Working dir
         run: ls -al
       - name: Action
-        uses: actions/checkout@vv4 # Accion, se usa para hacer checkout del codigo fuente del repositorio. Se puede usar en cualquier parte del job.
+        uses: actions/checkout@v4 # Accion, se usa para hacer checkout del codigo fuente del repositorio. Se puede usar en cualquier parte del job.
       - name: Working dir after actiob
         run: ls -al
 
