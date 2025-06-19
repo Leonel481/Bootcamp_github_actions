@@ -46,6 +46,7 @@ jobs:
         run: echo "${{ env.Salida }}" # Se puede usar para imprimir el valor de la variable de salida definida en el primer job. Se usa la sintaxis de variables de entorno y el nombre de la variable.
 
   third_job:
+    runs-on: ubuntu-latest
     steps:
       - name: Generar archivo
         run: |
