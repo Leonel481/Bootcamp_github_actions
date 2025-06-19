@@ -13,11 +13,20 @@ jobs:
 
     steps:
       - name: Working dir
+        id: step_1
         run: ls -al
       - name: Action
-        uses: actions/checkout@v4 # Accion, se usa para hacer checkout del codigo fuente del repositorio. Se puede usar en cualquier parte del job.
+        id: step_2
+        uses: actions/checkout@v4 # Accion, se usa para hacer checkout del codigo fuente del repositorio. Se puede usar en cualquier parte del job. (estructura nombre_autor/nombre_accion@version)
       - name: Working dir after actiob
+        id: step_3
         run: ls -al
+      - name : Set variable
+        id: step_4
+        run: echo "my_variable=Hello World" >> $GITHUB_OUTPUT # Se puede usar para definir variables de salida que se pueden usar en otros step del job. $GITHUB_OUTPUT es una variable de entorno que contiene la ruta al archivo de salida.
+      - name: Print variable
+        run: echo "${{ steps.step_4.outputs.my_variable }}" # Se puede usar para imprimir el valor de la variable de salida definida en el paso anterior. Se usa la sintaxis de pasos y el nombre del paso seguido de .outputs y el nombre de la variable.
+
 
   second_job:
     if: ${{ github.ref == 'refs/heads/main' }} # Condicion, solo se ejecutara si el push es a la rama main. ${{ github.ref }} es una variable de contexto que contiene la referencia del evento que disparo el workflow.
