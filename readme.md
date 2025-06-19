@@ -83,12 +83,12 @@ Se acceden con `${{ ... }}`.
 
 CI = Concento + Automatizacion
 
-- Proceso para integrar cambios frecuentes en el repositorio
-- Cada integracion  dispara un build y tests (pruebas unitarias)
-- Ayuda a detectar y reducir conflictos entre ramas
+- Proceso para integrar cambios frecuentes en el repositorio.
+- Cada integracion  dispara un build y tests (pruebas unitarias).
+- Ayuda a detectar y reducir conflictos entre ramas.
 
 ### CD (Continous Delivery)
 
-- Proceso de entrega de codigo a entorno staging (pre-produccion)
-- Libera versiones confiables bajo demanda
-- Automatiza el despliegue a produccion
+- Proceso de entrega de codigo a entorno staging (pre-produccion).
+- Libera versiones confiables bajo demanda.
+- Automatiza el despliegue a produccion.
