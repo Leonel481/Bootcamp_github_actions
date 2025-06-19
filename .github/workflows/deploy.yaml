@@ -43,4 +43,4 @@ jobs:
       - name: Hola Mundo
         run: echo "Step 2, Hola Mundo ${{ github.ref }}"
       - name: Print variable from first job
-        run: echo "$Salida"
+        run: echo "${{ env.Salida }}" # Se puede usar para imprimir el valor de la variable de salida definida en el primer job. Se usa la sintaxis de variables de entorno y el nombre de la variable.
