@@ -11,7 +11,9 @@ jobs:
       - name: Hola Mundo
         run: echo "Step 1, Hola Mundo"
 
-  second_job: 
+  second_job:
+    if: ${{ github.ref == 'refs/heads/main' }} # Condicion, solo se ejecutara si el push es a la rama main. ${{ github.ref }} es una variable de contexto que contiene la referencia del evento que disparo el workflow.
+    needs: first_job # Dependencia, hara que se ejecute secucialmente y no en paralelo
     runs-on: ubuntu-latest
 
     steps:
