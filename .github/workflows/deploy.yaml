@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      $Salida: ${{ needs.first_job.outputs.my_variable }} # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con $Salida
+      Salida: ${{ needs.first_job.outputs.my_variable }} # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con Salida
 
     steps:
       - name: Hola Mundo
