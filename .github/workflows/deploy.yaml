@@ -59,7 +59,7 @@ jobs:
 
   fourth_job:
     runs-on: ubuntu-latest
-    depends-on: third_job
+    needs: third_job
     steps:
       - name: Desacargar archivo
         uses: actions/download-artifact@v4
