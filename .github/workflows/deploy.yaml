@@ -11,6 +11,9 @@ jobs:
     env:
       NAME: Leo481 # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con $NAME
 
+    outputs:
+      salida: ${{ steps.step_4.outputs.my_variable }} # Variable de salida global, se puede usar en otros jobs. Se puede usar en el paso de run con ${{ needs.first_job.outputs.step_4.my_variable }}
+
     steps:
       - name: Working dir
         id: step_1
@@ -23,7 +26,7 @@ jobs:
         run: ls -al
       - name : Set variable
         id: step_4
-        run: echo "my_variable=Hello World" >> $GITHUB_OUTPUT # Se puede usar para definir variables de salida que se pueden usar en otros step del job. $GITHUB_OUTPUT es una variable de entorno que contiene la ruta al archivo de salida.
+        run: echo "my_variable=Hello World Cr7" >> $GITHUB_OUTPUT # Se puede usar para definir variables de salida que se pueden usar en otros step del job. $GITHUB_OUTPUT es una variable de entorno que contiene la ruta al archivo de salida.
       - name: Print variable
         run: echo "${{ steps.step_4.outputs.my_variable }}" # Se puede usar para imprimir el valor de la variable de salida definida en el paso anterior. Se usa la sintaxis de pasos y el nombre del paso seguido de .outputs y el nombre de la variable.
 
@@ -33,6 +36,11 @@ jobs:
     needs: first_job # Dependencia, hara que se ejecute secucialmente y no en paralelo
     runs-on: ubuntu-latest
 
+    env:
+      $Salida: ${{ needs.first_job.outputs.my_variable }} # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con $Salida
+
     steps:
       - name: Hola Mundo
         run: echo "Step 2, Hola Mundo ${{ github.ref }}"
+      - name: Print variable from first job
+        run: echo "$Salida"
