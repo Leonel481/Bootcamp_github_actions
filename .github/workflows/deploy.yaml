@@ -1,69 +1,12 @@
-name: Deploy to server
+name: Deploy app
 
 on: push
 
 jobs:
 
   first_job:
-    name: 1st Job
     runs-on: ubuntu-latest
 
-    env:
-      NAME: Leo481 # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con $NAME
-
-    outputs:
-      salida: ${{ steps.step_4.outputs.my_variable }} # Variable de salida global, se puede usar en otros jobs. Se puede usar en el paso de run con ${{ needs.first_job.outputs.step_4.my_variable }}
-
     steps:
-      - name: Working dir
-        id: step_1
-        run: ls -al
-      - name: Action
-        id: step_2
-        uses: actions/checkout@v4 # Accion, se usa para hacer checkout del codigo fuente del repositorio. Se puede usar en cualquier parte del job. (estructura nombre_autor/nombre_accion@version)
-      - name: Working dir after actiob
-        id: step_3
-        run: ls -al
-      - name : Set variable
-        id: step_4
-        run: echo "my_variable=Hello World Cr7" >> $GITHUB_OUTPUT # Se puede usar para definir variables de salida que se pueden usar en otros step del job. $GITHUB_OUTPUT es una variable de entorno que contiene la ruta al archivo de salida.
-      - name: Print variable
-        run: echo "${{ steps.step_4.outputs.my_variable }}" # Se puede usar para imprimir el valor de la variable de salida definida en el paso anterior. Se usa la sintaxis de pasos y el nombre del paso seguido de .outputs y el nombre de la variable.
-
-
-  second_job:
-    if: ${{ github.ref == 'refs/heads/main' }} # Condicion, solo se ejecutara si el push es a la rama main. ${{ github.ref }} es una variable de contexto que contiene la referencia del evento que disparo el workflow.
-    needs: first_job # Dependencia, hara que se ejecute secucialmente y no en paralelo
-    runs-on: ubuntu-latest
-
-    env:
-      Salida: ${{ needs.first_job.outputs.my_variable }} # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con Salida
-
-    steps:
-      - name: Hola Mundo
-        run: echo "Step 2, Hola Mundo ${{ github.ref }}"
-      - name: Print variable from first job
-        run: echo "${{ env.Salida }}" # Se puede usar para imprimir el valor de la variable de salida definida en el primer job. Se usa la sintaxis de variables de entorno y el nombre de la variable.
-
-  third_job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Generar archivo
-        run: |
-          echo "Archivo prueba, hola" >> test.log
-      - name: Subir artefacto
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-archive
-          path: test.log # Se usa para subir un archivo como artefacto del workflow. Se puede usar para compartir archivos entre jobs o para descargar archivos despues de que el workflow haya terminado. Github actions lo comprime y descomprime cuando se quiere utilizar.
-
-  fourth_job:
-    runs-on: ubuntu-latest
-    needs: third_job
-    steps:
-      - name: Desacargar archivo
-        uses: actions/download-artifact@v4
-        with:
-          name: test-archive
-      - name: cat file
-        run: cat
+      - name: Print Variable
+        run: echo "${{secrets.TOKEN_SECRET}}"
