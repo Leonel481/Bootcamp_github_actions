@@ -46,11 +46,12 @@ jobs:
         run: echo "${{ env.Salida }}" # Se puede usar para imprimir el valor de la variable de salida definida en el primer job. Se usa la sintaxis de variables de entorno y el nombre de la variable.
 
   third_job:
-    - name: Generar archivo
-      run: |
-        echo "Archivo prueba, hola" >> test.log
-    - name: Subir artefacto
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-archive
-        path: test.log # Se usa para subir un archivo como artefacto del workflow. Se puede usar para compartir archivos entre jobs o para descargar archivos despues de que el workflow haya terminado. El nombre del artefacto es test-archive y el archivo a subir es test.log. Github actions lo comprime y descomprime cuando se quiere utilizar.
+    steps:
+      - name: Generar archivo
+        run: |
+          echo "Archivo prueba, hola" >> test.log
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-archive
+          path: test.log # Se usa para subir un archivo como artefacto del workflow. Se puede usar para compartir archivos entre jobs o para descargar archivos despues de que el workflow haya terminado. El nombre del artefacto es test-archive y el archivo a subir es test.log. Github actions lo comprime y descomprime cuando se quiere utilizar.
