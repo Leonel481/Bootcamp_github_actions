@@ -12,8 +12,12 @@ jobs:
       NAME: Leo481 # Variable de entorno, se puede usar en cualquier parte del job. Se puede usar en el paso de run con $NAME
 
     steps:
-      - name: Hola Mundo
-        run: echo "Step 1, Hola Mundo $NAME"
+      - name: Working dir
+        run: ls -al
+      - name: Action
+        uses: actions/checkout@vv4 # Accion, se usa para hacer checkout del codigo fuente del repositorio. Se puede usar en cualquier parte del job.
+      - name: Working dir after actiob
+        rub: ls -al
 
   second_job:
     if: ${{ github.ref == 'refs/heads/main' }} # Condicion, solo se ejecutara si el push es a la rama main. ${{ github.ref }} es una variable de contexto que contiene la referencia del evento que disparo el workflow.
