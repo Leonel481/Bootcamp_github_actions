@@ -1,0 +1,40 @@
+name: Deploy
+
+on: push
+
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Variable
+        run: echo "${{ secrets.TOKEN_SECRET }}"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Instalar Dependencias
+        working-directory: ./Example01
+        run: npm install
+
+      - name: Run Test
+        working-directory: ./Example01
+        run: npm run test
+
+  deploy:
+    if: {{ always() }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy
+        run: echo "Deploy ... "
+
+
