@@ -42,8 +42,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
+    # Github pages otorga un token y da grants para poder hacer deploy
+    permissions:
+      pages: write
+      id-token: write
+
+    envvironment:
+      name: github-pages
+      url: $ (( steps.deployment-pages.outputs.page_url ))
+
     steps:
       - name: Deploy
-        run: echo "Deploy ... "
+        id: deployment-pages
+        uses: actions/deploy-pages@v4
+
 
 
