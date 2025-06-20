@@ -28,8 +28,12 @@ jobs:
         working-directory: ./Example01
         run: npm run test
 
+      - name: Build page
+        working-directory: ./Example01
+        run: npm run build
+        
   deploy:
-    if: ${{ always() }}
+    # if: ${{ always() }} # se ejecuta siempre, aunque los anteriores jobs fallen
     runs-on: ubuntu-latest
     needs: build
 
