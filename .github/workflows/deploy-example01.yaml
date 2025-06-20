@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, windoiws-latest]
+        os: [ubuntu-latest, windows-latest]
         node: [18,20]
 
     steps:
