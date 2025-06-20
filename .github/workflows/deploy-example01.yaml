@@ -49,12 +49,27 @@ jobs:
 
     environment:
       name: github-pages
-      url: ${{ steps.deployment-pages.outputs.page_url }} 
+      url: ${{ steps.deployment-pages.outputs.page_url }} # URL de la página desplegada
 
     steps:
       - name: Deploy
         id: deployment-pages
         uses: actions/deploy-pages@v4
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: ${{ always() }}
+
+    steps:
+      - name: Notify to slack
+        uses: 8398a7/action-slack@v3
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+        with:
+          status: ${{ job.status }}
+          fields: repo, commit, author, message, job, took
 
 
 
