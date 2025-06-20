@@ -32,13 +32,10 @@ jobs:
         working-directory: ./Example01
         run: npm run build
 
-      - name: Listar archivos
-        run: ls -R example01/public
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: example01/public
+          path: Example01/public
 
   deploy:
     # if: ${{ always() }} # se ejecuta siempre, aunque los anteriores jobs fallen
