@@ -35,7 +35,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: example01/public
+          path: example01/public
 
   deploy:
     # if: ${{ always() }} # se ejecuta siempre, aunque los anteriores jobs fallen
